@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-star-rating@next/dist/VueStarRating.umd.min.js"></script>
+
+
+    <style>
+        .button_author {
+            cursor: pointer;
+            font-style: italic
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .book-title {
+            font-weight: 700;
+        }
+
+        .books {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div v-for="(book, index) in books" class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{ book.title }}
+                </h4>
+                <div class="card-text">
+                    <label v-if="book.show_author">{{ book.author}}</label>
+                    <label v-else> **** </label> |
+                    <span class="button_author" @click="book.show_author = false" v-if="book.show_author">Hide Author</span>
+                    <span class="button_author" @click="book.show_author = true" v-if="!book.show_author">Show Author</span>
+                    <star-rating :animate="true" :rating="book.rating" :increment="0.5" @update:rating="book.rating = $event"></star-rating>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
